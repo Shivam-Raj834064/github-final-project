@@ -1,4 +1,3 @@
-
 name: Compile Java Backend
 
 on:
@@ -26,4 +25,4 @@ jobs:
       - name: Compile Java backend
         run: |
           cd app
-          mvn clean compile
+          ./mvnw clean compile
