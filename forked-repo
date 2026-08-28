@@ -1,1 +1,32 @@
 
+curl -s https://api.github.com/repos/Shivam-Raj834064/mcino-Introduction-to-Git-and-GitHub
+{
+  "id": 1349359018,
+  "node_id": "R_kgDOUG2Vqg",
+  "name": "mcino-Introduction-to-Git-and-GitHub",
+  "full_name": "Shivam-Raj834064/mcino-Introduction-to-Git-and-GitHub",
+  "private": false,
+  "owner": {
+    "login": "Shivam-Raj834064",
+    "id": 190263219,
+    "node_id": "U_kgDOC1cvsw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/190263219?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Shivam-Raj834064",
+    "html_url": "https://github.com/Shivam-Raj834064",
+    "followers_url": "https://api.github.com/users/Shivam-Raj834064/followers",
+    "following_url": "https://api.github.com/users/Shivam-Raj834064/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Shivam-Raj834064/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Shivam-Raj834064/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Shivam-Raj834064/subscriptions",
+    "organizations_url": "https://api.github.com/users/Shivam-Raj834064/orgs",
+    "repos_url": "https://api.github.com/users/Shivam-Raj834064/repos",
+    "events_url": "https://api.github.com/users/Shivam-Raj834064/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Shivam-Raj834064/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "html_url": "https://github.com/Shivam-Raj834064/mcino-Introduction-to-Git-and-GitHub",
+  "description": "Introduction-to-Git-and-GitHub",
+  "fork": true,
