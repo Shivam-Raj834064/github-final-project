@@ -62,3 +62,31 @@ public class PrescriptionController {
                 : "Prescription not found";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+@PostMapping
+public ResponseEntity<Prescription> createPrescription(
+        @Valid @RequestBody Prescription prescription) {
+    return ResponseEntity.ok(prescription);
+}
+
+
+
+
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+
+
+
+
+
+
