@@ -1,15 +1,20 @@
+# Stage 1: Build the Spring Boot application
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
 
-# Use a Java runtime image
-FROM eclipse-temurin:17-jdk
-
-# Set the working directory
 WORKDIR /app
 
-# Copy the application files
-COPY . .
+COPY pom.xml .
+COPY src ./src
 
-# Expose the application port
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run the application
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
+COPY --from=builder /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Start the application
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
