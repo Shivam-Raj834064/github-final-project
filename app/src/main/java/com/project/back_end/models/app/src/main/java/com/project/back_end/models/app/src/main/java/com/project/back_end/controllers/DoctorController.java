@@ -35,11 +35,21 @@ public class DoctorController {
     }
 
     // Get doctor availability
-    @GetMapping("/{id}/availability")
-    public List<String> getDoctorAvailability(@PathVariable Long id) {
+    // Required path variables: user, doctorId, date, token
+    @GetMapping("/{user}/{doctorId}/availability/{date}/{token}")
+    public List<String> getDoctorAvailability(
+            @PathVariable String user,
+            @PathVariable Long doctorId,
+            @PathVariable String date,
+            @PathVariable String token) {
+
+        // Validate token
+        if (token == null || token.isBlank() || !isValidToken(token)) {
+            return new ArrayList<>();
+        }
+
         List<String> availability = new ArrayList<>();
 
-        // Return available appointment time slots
         availability.add("09:00");
         availability.add("10:00");
         availability.add("11:00");
@@ -51,13 +61,26 @@ public class DoctorController {
     }
 
     // Check whether a doctor is available at a specific time
-    @GetMapping("/{id}/availability/check")
+    @GetMapping("/{user}/{doctorId}/availability/{date}/{token}/check")
     public boolean checkDoctorAvailability(
-            @PathVariable Long id,
+            @PathVariable String user,
+            @PathVariable Long doctorId,
+            @PathVariable String date,
+            @PathVariable String token,
             @RequestParam String time) {
 
-        List<String> availableTimes = getDoctorAvailability(id);
+        if (token == null || token.isBlank() || !isValidToken(token)) {
+            return false;
+        }
+
+        List<String> availableTimes =
+                getDoctorAvailability(user, doctorId, date, token);
 
         return availableTimes.contains(time);
+    }
+
+    // Basic token validation
+    private boolean isValidToken(String token) {
+        return token.equals("valid-token");
     }
 }
