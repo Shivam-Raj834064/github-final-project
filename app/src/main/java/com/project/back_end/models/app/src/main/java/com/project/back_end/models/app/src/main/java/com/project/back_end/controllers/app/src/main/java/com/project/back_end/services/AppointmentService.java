@@ -45,3 +45,10 @@ public class AppointmentService {
         );
     }
 }
+
+
+
+
+@NotNull
+@Future
+private LocalDateTime appointmentTime;
