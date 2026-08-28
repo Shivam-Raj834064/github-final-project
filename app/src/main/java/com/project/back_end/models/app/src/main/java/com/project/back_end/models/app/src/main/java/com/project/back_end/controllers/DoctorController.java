@@ -1,4 +1,3 @@
-
 package com.project.back_end.controllers;
 
 import com.project.back_end.models.Doctor;
@@ -13,11 +12,13 @@ public class DoctorController {
 
     private final List<Doctor> doctors = new ArrayList<>();
 
+    // Get all doctors
     @GetMapping
     public List<Doctor> getAllDoctors() {
         return doctors;
     }
 
+    // Get doctor by ID
     @GetMapping("/{id}")
     public Doctor getDoctorById(@PathVariable Long id) {
         return doctors.stream()
@@ -26,30 +27,37 @@ public class DoctorController {
                 .orElse(null);
     }
 
+    // Create a new doctor
     @PostMapping
     public Doctor createDoctor(@RequestBody Doctor doctor) {
         doctors.add(doctor);
         return doctor;
     }
 
-    @PutMapping("/{id}")
-    public Doctor updateDoctor(@PathVariable Long id,
-                               @RequestBody Doctor updatedDoctor) {
-        for (int i = 0; i < doctors.size(); i++) {
-            if (doctors.get(i).getDoctorId().equals(id)) {
-                doctors.set(i, updatedDoctor);
-                return updatedDoctor;
-            }
-        }
-        return null;
+    // Get doctor availability
+    @GetMapping("/{id}/availability")
+    public List<String> getDoctorAvailability(@PathVariable Long id) {
+        List<String> availability = new ArrayList<>();
+
+        // Return available appointment time slots
+        availability.add("09:00");
+        availability.add("10:00");
+        availability.add("11:00");
+        availability.add("14:00");
+        availability.add("15:00");
+        availability.add("16:00");
+
+        return availability;
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteDoctor(@PathVariable Long id) {
-        boolean removed = doctors.removeIf(
-                doctor -> doctor.getDoctorId().equals(id)
-        );
+    // Check whether a doctor is available at a specific time
+    @GetMapping("/{id}/availability/check")
+    public boolean checkDoctorAvailability(
+            @PathVariable Long id,
+            @RequestParam String time) {
 
-        return removed ? "Doctor deleted successfully" : "Doctor not found";
+        List<String> availableTimes = getDoctorAvailability(id);
+
+        return availableTimes.contains(time);
     }
 }
