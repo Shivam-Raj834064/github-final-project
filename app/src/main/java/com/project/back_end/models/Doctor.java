@@ -68,3 +68,10 @@ public class Doctor {
         this.phone = phone;
     }
 }
+
+
+import jakarta.persistence.ElementCollection;
+import java.util.List;
+
+@ElementCollection
+private List<String> availableTimes;
