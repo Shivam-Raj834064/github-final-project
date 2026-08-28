@@ -90,3 +90,11 @@ public class Appointment {
         this.reason = reason;
     }
 }
+
+
+import jakarta.validation.constraints.NotNull;
+
+
+@NotNull
+@Future
+private LocalDateTime appointmentTime;
