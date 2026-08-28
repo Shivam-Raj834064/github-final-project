@@ -3,6 +3,7 @@ package com.project.back_end.services;
 import com.project.back_end.models.Doctor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,12 +50,13 @@ public class DoctorService {
         );
     }
 
-    // Get doctor availability
-    public List<String> getDoctorAvailability(Long doctorId) {
+    // Get doctor availability for a specific date
+    public List<String> getDoctorAvailability(
+            Long doctorId, LocalDate date) {
 
         Doctor doctor = getDoctorById(doctorId);
 
-        if (doctor == null) {
+        if (doctor == null || date == null) {
             return new ArrayList<>();
         }
 
@@ -68,17 +70,21 @@ public class DoctorService {
         );
     }
 
-    // Validate doctor login using email
-    public boolean validateDoctorCredentials(String email) {
+    // Validate doctor login using email and password
+    public boolean validateDoctorCredentials(
+            String email, String password) {
 
-        if (email == null || email.isBlank()) {
+        if (email == null || email.isBlank()
+                || password == null || password.isBlank()) {
             return false;
         }
 
         return doctors.stream()
                 .anyMatch(doctor ->
                         doctor.getEmail() != null &&
-                        doctor.getEmail().equalsIgnoreCase(email)
+                        doctor.getPassword() != null &&
+                        doctor.getEmail().equalsIgnoreCase(email) &&
+                        doctor.getPassword().equals(password)
                 );
     }
 }
@@ -86,7 +92,25 @@ public class DoctorService {
 
 
 
-public List<String> getDoctorAvailability(Long doctorId)
 
 
-public boolean validateDoctorCredentials(String email)
+
+public String getPassword()
+
+
+    List<String> availableTimes = getDoctorAvailability(id);
+
+
+doctorService.getDoctorAvailability(id, date);
+
+
+@GetMapping("/{id}/availability")
+public List<String> getDoctorAvailability(
+        @PathVariable Long id,
+        @RequestParam LocalDate date) {
+
+    return doctorService.getDoctorAvailability(id, date);
+}
+
+
+import java.time.LocalDate;
